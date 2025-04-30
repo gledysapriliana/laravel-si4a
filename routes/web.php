@@ -9,3 +9,7 @@ Route::get('/', function () {
 Route::get('/profil', function () {
     return view('profil');
 });
+
+use App\Http\Controllers\FakultasController;
+
+Route::resource('/fakultas', FakultasController::class);

@@ -12,7 +12,10 @@ class FakultasController extends Controller
      */
     public function index()
     {
-        //
+        // panggil model fakultas menggunkan eloquent
+        $fakultas = Fakultas::all(); // perintah SQL select * from fakultas
+        // dd($fakultas); // dump and die
+        return view('fakultas.index', compact('fakultas'));
     }
 
     /**
