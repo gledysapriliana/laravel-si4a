@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('nama', 30);
             $table->enum('jk', ['L', 'P']);
             $table->date('tanggal_lahir');
-            $table->string('tempat_lahir',30);
-            $table->string('asal_sma',30);
+            $table->string('tempat_lahir', 30);
+            $table->string('asal_sma', 30);
             $table->foreignId('prodi_id')->constrained('prodi')->onDelete('restrict')->onUpdate('restrict');
             $table->string('foto', 50)->nullable();
             $table->timestamps();
