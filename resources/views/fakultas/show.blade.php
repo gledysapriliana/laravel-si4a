@@ -1,11 +1,11 @@
-@extends('layout.main') @section('title', 'Prodi') @section('content')
+@extends('layout.main') @section('title', 'Fakultas') @section('content')
 <!--begin::Row-->
 <div class="row">
     <div class="col-12">
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">List Prodi</h3>
+                <h3 class="card-title">List Fakultas</h3>
                 <div class="card-tools">
                     <button
                         type="button"
@@ -27,28 +27,34 @@
                 </div>
             </div>
             <div class="card-body">
-                <a href="{{ route('prodi.create') }}" class="btn btn-primary"> Tambah </a>
-                <hr>
-                <table class="table table-bordered table-striped">
+                <table class="table">
+                    <tr>
+                        <tr>
+                            <td colspan="2">
+                                <img src="{{ asset('images/'. $fakultas->foto) }}" class="img-fluid" width="200"">
+                            </td>
+                        </tr>
+                    </tr>
                     <tr>
                         <th>Nama</th>
-                        <th>Singkatan</th>
-                        <th>Kaprodi</th>
-                        <th>Sekretaris</th>
-                        <th>Fakultas</th>
+                        <td>{{ $fakultas->nama}}</td>
                     </tr>
-                    @foreach ($prodi as $item)
                     <tr>
-                        <td>{{$item->nama}}</td>
-                        <td>{{$item->singkatan}}</td>
-                        <td>{{$item->kaprodi}}</td>
-                        <td>{{$item->sekretaris}}</td>
-                        <td>{{$item->fakultas->nama}}</td>
+                        <th>Singkatan</th>
+                        <td>{{ $fakultas->singkatan}}</td>
                     </tr>
-                    @endforeach
+                    <tr>
+                        <th>Dekan</th>
+                        <td>{{ $fakultas->dekan}}</td>
+                    </tr>
+                    <tr>
+                        <th>Wakil Dekan</th>
+                        <td>{{ $fakultas->wakil_dekan}}</td>
+                    </tr>
                 </table>
-                @endsection
             </div>
         </div>
     </div>
 </div>
+@endsection
+

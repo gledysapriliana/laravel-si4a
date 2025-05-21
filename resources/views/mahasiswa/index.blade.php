@@ -27,8 +27,11 @@
                 </div>
             </div>
             <div class="card-body">
+                <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary"> Tambah </a>
+                <hr>
                 <table class="table table-bordered table-striped">
                     <tr>
+                        <th>Foto</th>
                         <th>NPM</th>
                         <th>Nama</th>
                         <th>Jenis Kelamin</th>
@@ -36,9 +39,11 @@
                         <th>Tempat Lahir</th>
                         <th>Asal SMA</th>
                         <th>Program Studi</th>
+                        <th>Aksi</th>
                     </tr>
                     @foreach ($mahasiswa as $item)
                     <tr>
+                        <td><img src = "images/{{$item->foto}}" width="80px"/></td>
                         <td>{{$item->npm}}</td>
                         <td>{{$item->nama}}</td>
                         <td>{{$item->jk}}</td>
@@ -46,11 +51,21 @@
                         <td>{{$item->tempat_lahir}}</td>
                         <td>{{$item->asal_sma}}</td>
                         <td>{{$item->prodi->nama}}</td>
+                        <td>
+                            <a href="{{ route('mahasiswa.show', $item->id) }}" class="btn btn-info">Show</a>
+                            <a href="{{ route('mahasiswa.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                            <form method="POST" action="{{ route('mahasiswa.destroy', $item->id) }}">
+                                        @csrf
+                                        <input name="_method" type="hidden" value="DELETE">
+                                        <button type="submit" class="btn btn-xs btn-danger btn-rounded show_confirm"
+                                            data-toggle="tooltip" title='Delete'
+                                            data-nama='{{ $item->nama }}'>Hapus</button>
+                                    </form>
+                        </td>
                     </tr>
                     @endforeach
                 </table>
-                @endsection
             </div>
         </div>
     </div>
-</div>
+@endsection

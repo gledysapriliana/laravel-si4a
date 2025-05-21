@@ -1,12 +1,12 @@
-@extends('layout.main') @section('title', 'Fakultas') @section('content')
+@extends('layout.main') @section('title', 'Program Studi') @section('content')
 <!--begin::Row-->
 <div class="row">
     <div class="col-12">
-        {{-- form tambah fakultas --}}
+        {{-- form tambah Prodi --}}
         <div class="card card-primary card-outline mb-4">
             <!--begin::Header-->
             <div class="card-header">
-                <div class="card-title">Tambah Prodi</div>
+                <div class="card-title">Tambah Program Studi</div>
             </div>
             <!--end::Header-->
             <!--begin::Form-->
@@ -16,7 +16,7 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <label for="nama" class="form-label"
-                            >Nama Fakultas</label
+                            >Nama Program Studi</label
                         >
                         <input type="text" class="form-control" name="nama" value="{{old('nama')}}" />
                         @error('nama')
@@ -45,6 +45,18 @@
                         >
                         <input type="text" class="form-control" name="sekretaris" value="{{old('sekretaris')}}" />
                         @error('sekretaris')
+                        <div class="text-danger">{{$messege}}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="fakultas_id" class="form-label"
+                            >Fakultas</label
+                        >
+                        <select class="form-control" name="fakultas_id">
+                            @foreach ($fakultas as $item) <option value="{{$item->id}}">{{$item->nama}}</option>
+                            @endforeach
+                        </select>
+                        @error('fakultas_id')
                         <div class="text-danger">{{$messege}}</div>
                         @enderror
                     </div>

@@ -49,9 +49,11 @@ class FakultasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Fakultas $fakultas)
+    public function show($fakultas)
     {
-        //
+        $fakultas = Fakultas::findOrFail($fakultas);
+        // dd($fakultas); //untuk mengecek apakah data fakultas ada
+        return view('fakultas.show', compact('fakultas'));
     }
 
     /**

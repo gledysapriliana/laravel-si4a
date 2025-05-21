@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fakultas;
 use App\Models\Prodi;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,8 @@ class ProdiController extends Controller
      */
     public function create()
     {
-        return view('prodi.create');
+        $fakultas = Fakultas::all();
+        return view('prodi.create', compact('fakultas'));
     }
 
     /**
@@ -37,6 +39,7 @@ class ProdiController extends Controller
             'singkatan' => 'required|max:5',
             'kaprodi' => 'required',
             'sekretaris' => 'required',
+            'fakultas_id' => 'required',
         ]);
 
         //simpan data ke tabel fakultas
