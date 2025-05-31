@@ -55,12 +55,12 @@
                             <a href="{{ route('mahasiswa.show', $item->id) }}" class="btn btn-info">Show</a>
                             <a href="{{ route('mahasiswa.edit', $item->id) }}" class="btn btn-warning">Edit</a>
                             <form method="POST" action="{{ route('mahasiswa.destroy', $item->id) }}">
-                                        @csrf
-                                        <input name="_method" type="hidden" value="DELETE">
-                                        <button type="submit" class="btn btn-xs btn-danger btn-rounded show_confirm"
-                                            data-toggle="tooltip" title='Delete'
-                                            data-nama='{{ $item->nama }}'>Hapus</button>
-                                    </form>
+                                @csrf
+                                <input name="_method" type="hidden" value="DELETE">
+                                <button type="submit" class="btn btn-xs btn-danger btn-rounded show_confirm"
+                                    data-toggle="tooltip" title='Delete'
+                                    data-nama='{{ $item->nama }}'>Hapus</button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach

@@ -36,6 +36,7 @@
                         <th>Kaprodi</th>
                         <th>Sekretaris</th>
                         <th>Fakultas</th>
+                        <th>Action</th>
                     </tr>
                     @foreach ($prodi as $item)
                     <tr>
@@ -44,6 +45,17 @@
                         <td>{{$item->kaprodi}}</td>
                         <td>{{$item->sekretaris}}</td>
                         <td>{{$item->fakultas->nama}}</td>
+                        <td>
+                            <a href="{{ route('prodi.show', $item->id) }}" class="btn btn-info">Show</a>
+                            <a href="{{ route('prodi.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                            <form method="POST" action="{{ route('prodi.destroy', $item->id) }}">
+                                @csrf
+                                <input name="_method" type="hidden" value="DELETE">
+                                <button type="submit" class="btn btn-xs btn-danger btn-rounded show_confirm"
+                                    data-toggle="tooltip" title='Delete'
+                                    data-nama='{{ $item->nama }}'>Hapus</button>
+                            </form>
+                        </td>
                     </tr>
                     @endforeach
                 </table>

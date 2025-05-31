@@ -20,7 +20,7 @@
                         >
                         <input type="text" class="form-control" name="nama" value="{{old('nama')}}" />
                         @error('nama')
-                        <div class="text-danger">{{$messege}}</div>
+                        <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
@@ -29,7 +29,7 @@
                         >
                         <input type="text" class="form-control" name="singkatan" value="{{old('singkatan')}}" />
                         @error('singkatan')
-                        <div class="text-danger">{{$messege}}</div>
+                        <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
@@ -37,7 +37,7 @@
                             >
                         <input type="text" class="form-control" name="dekan" value="{{old('dekan')}}" />
                         @error('dekan')
-                        <div class="text-danger">{{$messege}}</div>
+                        <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
@@ -46,7 +46,7 @@
                         >
                         <input type="text" class="form-control" name="wakil_dekan" value="{{old('wakil_dekan')}}" />
                         @error('wakil_dekan')
-                        <div class="text-danger">{{$messege}}</div>
+                        <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
                 </div>

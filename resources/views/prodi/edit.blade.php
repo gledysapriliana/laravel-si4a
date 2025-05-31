@@ -1,24 +1,25 @@
-@extends('layout.main') @section('title', 'Program Studi') @section('content')
+@extends('layout.main') @section('title', 'Prodi') @section('content')
 <!--begin::Row-->
 <div class="row">
     <div class="col-12">
-        {{-- form tambah Prodi --}}
+        {{-- form tambah prodi --}}
         <div class="card card-primary card-outline mb-4">
             <!--begin::Header-->
             <div class="card-header">
-                <div class="card-title">Tambah Program Studi</div>
+                <div class="card-title">Ubah Prodi</div>
             </div>
             <!--end::Header-->
             <!--begin::Form-->
-            <form action="{{ route('prodi.store') }}" method="POST">
+            <form action="{{ route('prodi.update', $prodi->id) }}" method="POST">
                 @csrf
+                @method('PUT')
                 <!--begin::Body-->
                 <div class="card-body">
                     <div class="mb-3">
                         <label for="nama" class="form-label"
                             >Nama Program Studi</label
                         >
-                        <input type="text" class="form-control" name="nama" value="{{old('nama')}}" />
+                        <input type="text" class="form-control" name="nama" value="{{old('nama') ? old('nama') : $prodi->nama}}" />
                         @error('nama')
                         <div class="text-danger">{{$message}}</div>
                         @enderror
@@ -27,14 +28,14 @@
                         <label for="singkatan" class="form-label"
                             >Singkatan</label
                         >
-                        <input type="text" class="form-control" name="singkatan" value="{{old('singkatan')}}" />
+                        <input type="text" class="form-control" name="singkatan" value="{{old('singkatan') ? old('singkatan') : $prodi->singkatan}}" />
                         @error('singkatan')
                         <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label for="kaprodi" class="form-label">Kaprodi</label>
-                        <input type="text" class="form-control" name="kaprodi" value="{{old('kaprodi')}}" />
+                        <input type="text" class="form-control" name="kaprodi" value="{{old('kaprodi') ? old('kaprodi') : $prodi->kaprodi}}" />
                         @error('kaprodi')
                         <div class="text-danger">{{$message}}</div>
                         @enderror
@@ -43,7 +44,7 @@
                         <label for="sekretaris" class="form-label"
                             >Sekretaris</label
                         >
-                        <input type="text" class="form-control" name="sekretaris" value="{{old('sekretaris')}}" />
+                        <input type="text" class="form-control" name="sekretaris" value="{{old('sekretaris') ? old('sekretaris') : $prodi->sekretaris}}" />
                         @error('sekretaris')
                         <div class="text-danger">{{$message}}</div>
                         @enderror
@@ -53,7 +54,9 @@
                             >Fakultas</label
                         >
                         <select class="form-control" name="fakultas_id">
-                            @foreach ($fakultas as $item) <option value="{{$item->id}}">{{$item->nama}}</option>
+                            @foreach ($fakultas as $item) 
+                            <option value="{{ $item->id }}" {{ old('fakultas_id') == $item->id ? 'selected' : ($prodi->fakultas_id == $item->id ? 'selected' : null ) }}> {{$item->nama}}
+                            </option>
                             @endforeach
                         </select>
                         @error('fakultas_id')

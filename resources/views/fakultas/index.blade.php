@@ -49,11 +49,13 @@
                         <td>
                             <a href="{{ route('fakultas.show', $item->id) }}" class="btn btn-info">Show</a>
                             <a href="{{ route('fakultas.edit', $item->id) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('fakultas.destroy', $item->id) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger show_confirm" data-toggle="tooltip" title="Delete" data-nama="{{ $item->nama }}">Delete</button>
-                            </form>
+                            <form method="POST" action="{{ route('fakultas.destroy', $item->id) }}">
+                                        @csrf
+                                        <input name="_method" type="hidden" value="DELETE">
+                                        <button type="submit" class="btn btn-xs btn-danger btn-rounded show_confirm"
+                                            data-toggle="tooltip" title='Delete'
+                                            data-nama='{{ $item->nama }}'>Delete</button>
+                                    </form>
                         </td>
                     </tr>
                     @endforeach

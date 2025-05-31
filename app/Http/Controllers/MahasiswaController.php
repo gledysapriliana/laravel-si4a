@@ -72,17 +72,38 @@ class MahasiswaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Mahasiswa $mahasiswa)
+    public function edit($mahasiswa)
     {
-        //
+        $mahasiswa = Mahasiswa::findOrFail($mahasiswa);
+        $prodi = Prodi::all();
+        // dd($mahasiswa);
+        return view('mahasiswa.edit', compact('mahasiswa', 'prodi'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Mahasiswa $mahasiswa)
+    public function update(Request $request, $mahasiswa)
     {
-        //
+        $mahasiswa = Mahasiswa::findOrFail($mahasiswa);
+
+        // validasi input
+        $input = $request->validate([
+            'npm' => 'required|mahasiswa',
+            'nama' => 'required',
+            'jk' => 'required',
+            'tanggal_lahir' => 'required',
+            'tempat_lahir' => 'required',
+            'asal_sma' => 'required',
+            'prodi_id' => 'required',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        //update data Mahasiswa
+        $mahasiswa->update($input);
+
+        //rederict ke route Mahasiswa.index
+        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil diperbarui.');
     }
 
     /**
@@ -90,8 +111,21 @@ class MahasiswaController extends Controller
      */
     public function destroy(Mahasiswa $mahasiswa)
     {
+        //hapus foto jika ada
+        if ($mahasiswa->foto) {
+            $fotoPath = public_path('images/' .
+                $mahasiswa->foto);
+            if (file_exists($fotoPath)) {
+                unlink($fotoPath); //hapus file foto
+            }
+        }
+
         // dd($mahasiswa);
+
+        //hapus data mahasiswa
         $mahasiswa->delete();
-        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa a.n. ' . $mahasiswa->nama . ' berhasil dihapus.');
+
+        //redrict ke route mahasiswa.index
+        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil dihapus.');
     }
 }
