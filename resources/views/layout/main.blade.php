@@ -1,10 +1,9 @@
-
 <!doctype html>
 <html lang="en">
   <!--begin::Head-->
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>@yield('title')</title>
+    <title>@yield("title")</title>
     <!--begin::Primary Meta Tags-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="title" content="AdminLTE 4 | Unfixed Sidebar" />
@@ -113,7 +112,7 @@
                   <div class="d-flex">
                     <div class="flex-shrink-0">
                       <img
-                        src="{{ asset('assets/img/user8-128x128.jpg') }}"
+                        src=" {{ asset('assets/img/user8-128x128.jpg') }}"
                         alt="User Avatar"
                         class="img-size-50 rounded-circle me-3"
                       />
@@ -208,7 +207,7 @@
                   class="user-image rounded-circle shadow"
                   alt="User Image"
                 />
-                <span class="d-none d-md-inline">Alexander Pierce</span>
+                <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
               </a>
               <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                 <!--begin::User Image-->
@@ -219,7 +218,7 @@
                     alt="User Image"
                   />
                   <p>
-                    Alexander Pierce - Web Developer
+                    {{ Auth::user()->name }} - Dosen/Admin
                     <small>Member since Nov. 2023</small>
                   </p>
                 </li>
@@ -236,9 +235,19 @@
                 </li>
                 <!--end::Menu Body-->
                 <!--begin::Menu Footer-->
-                <li class="user-footer">
+                <li class="user-footer d-flex justify-content-between">
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
-                  <a href="#" class="btn btn-default btn-flat float-end">Sign out</a>
+                  {{-- <a href="#" class="btn btn-default btn-flat float-end">Sign out</a> --}}
+                  <!-- Authentication -->
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+
+                        <x-dropdown-link :href="route('logout')"
+                                onclick="event.preventDefault();
+                                  this.closest('form').submit();" class="btn btn-default btn-flat float-end">
+                            {{ __('Log Out') }}
+                        </x-dropdown-link>
+                    </form>
                 </li>
                 <!--end::Menu Footer-->
               </ul>
@@ -318,7 +327,7 @@
               </li>
               <li class="nav-item">
                 <a class='nav-link' href='{{ url('sesi') }}'>
-                  <i class="nav-icon bi bi-backpack3"></i>
+                  <i class="nav-icon bi bi-clock"></i>
                   <p>Sesi</p>
                 </a>
               </li>
