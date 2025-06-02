@@ -304,6 +304,24 @@
                   <p>Mahasiswa</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a class='nav-link' href='{{ url('jadwal') }}'>
+                  <i class="nav-icon bi bi-calendar"></i>
+                  <p>Jadwal</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class='nav-link' href='{{ url('matakuliah') }}'>
+                  <i class="nav-icon bi bi-book"></i>
+                  <p>Mata Kuliah</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class='nav-link' href='{{ url('sesi') }}'>
+                  <i class="nav-icon bi bi-backpack3"></i>
+                  <p>Sesi</p>
+                </a>
+              </li>
             </ul>
             <!--end::Sidebar Menu-->
           </nav>
