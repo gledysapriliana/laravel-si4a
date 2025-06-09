@@ -52,7 +52,7 @@
                             <td>{{ $item->mataKuliah->nama }}</td>
                             <td>{{ $item->user->name }}</td>
                             <td>{{ $item->sesi->nama }}</td>
-                            <td>
+                            <td class="d-flex gap-2">
                             <a href="{{ route('jadwal.show', $item->id) }}" class="btn btn-info">Show</a>
                             <a href="{{ route('jadwal.edit', $item->id) }}" class="btn btn-warning">Edit</a>
                             <form method="POST" action="{{ route('jadwal.destroy', $item->id) }}">

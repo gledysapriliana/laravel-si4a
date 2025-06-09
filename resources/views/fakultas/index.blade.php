@@ -30,8 +30,10 @@
                 </div>
             </div>
             <div class="card-body">
+                @can('create', App\Models\Fakultas::class)
                 <a href="{{ route('fakultas.create') }}" class="btn btn-primary"> Tambah </a>
                 <hr>
+                @endcan
                 <table class="table table-bordered table-striped">
                     <tr>
                         <th>Nama</th>
@@ -46,16 +48,20 @@
                         <td>{{$item->singkatan}}</td>
                         <td>{{$item->dekan}}</td>
                         <td>{{$item->wakil_dekan}}</td>
-                        <td>
+                        <td class="d-flex gap-2">
                             <a href="{{ route('fakultas.show', $item->id) }}" class="btn btn-info">Show</a>
+                            @can('update', $item)
                             <a href="{{ route('fakultas.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                            @endcan
+                            @can('delete', $item)
                             <form method="POST" action="{{ route('fakultas.destroy', $item->id) }}">
-                                        @csrf
-                                        <input name="_method" type="hidden" value="DELETE">
-                                        <button type="submit" class="btn btn-xs btn-danger btn-rounded show_confirm"
-                                            data-toggle="tooltip" title='Delete'
-                                            data-nama='{{ $item->nama }}'>Delete</button>
-                                    </form>
+                                @csrf
+                                <input name="_method" type="hidden" value="DELETE">
+                                <button type="submit" class="btn btn-xs btn-danger btn-rounded show_confirm"
+                                    data-toggle="tooltip" title='Delete'
+                                    data-nama='{{ $item->nama }}'>Delete</button>
+                            </form>
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

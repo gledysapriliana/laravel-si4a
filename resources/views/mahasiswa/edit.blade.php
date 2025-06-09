@@ -114,7 +114,7 @@
                     <div class="mb-3">
                         <label for="foto" class="form-label">Foto</label>
                         <div class="mb-2">
-                            <!-- <img src="{{ asset('images/'. $mahasiswa->foto) }}" alt="Foto Mahasiswa" style="max-width: 150px; height: auto;"> -->
+                            <img src="{{ asset('images/'. $mahasiswa->foto) }}" alt="Foto Mahasiswa" style="max-width: 150px; height: auto;">
                         </div>
                         <input type="file" class="form-control" name="foto" />
                         @error('foto')

@@ -45,9 +45,12 @@
                         <td>{{$item->kaprodi}}</td>
                         <td>{{$item->sekretaris}}</td>
                         <td>{{$item->fakultas->nama}}</td>
-                        <td>
+                        <td class="d-flex gap-2">
                             <a href="{{ route('prodi.show', $item->id) }}" class="btn btn-info">Show</a>
+                            @can('update', $item)
                             <a href="{{ route('prodi.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                            @endcan
+                            @can('delete', $item)
                             <form method="POST" action="{{ route('prodi.destroy', $item->id) }}">
                                 @csrf
                                 <input name="_method" type="hidden" value="DELETE">
@@ -55,6 +58,7 @@
                                     data-toggle="tooltip" title='Delete'
                                     data-nama='{{ $item->nama }}'>Hapus</button>
                             </form>
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

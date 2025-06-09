@@ -51,7 +51,7 @@
                         <td>{{$item->tempat_lahir}}</td>
                         <td>{{$item->asal_sma}}</td>
                         <td>{{$item->prodi->nama}}</td>
-                        <td>
+                        <td class="d-flex gap-2">
                             <a href="{{ route('mahasiswa.show', $item->id) }}" class="btn btn-info">Show</a>
                             <a href="{{ route('mahasiswa.edit', $item->id) }}" class="btn btn-warning">Edit</a>
                             <form method="POST" action="{{ route('mahasiswa.destroy', $item->id) }}">

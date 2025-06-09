@@ -37,7 +37,7 @@
                     @foreach ($sesi as $item)
                     <tr>
                         <td>{{ $item->nama }}</td>
-                        <td>
+                        <td class="d-flex gap-2">
                             <a href="{{ route('sesi.show', $item->id) }}" class="btn btn-info">Show</a>
                             <a href="{{ route('sesi.edit', $item->id) }}" class="btn btn-warning">Edit</a>
                             <form method="POST" action="{{ route('sesi.destroy', $item->id) }}">

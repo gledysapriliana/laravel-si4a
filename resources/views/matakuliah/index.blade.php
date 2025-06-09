@@ -42,13 +42,13 @@
                         <th>Aksi</th>
                     </tr>
                     <!-- </thead>
-                        <tbody> -->
+                    <tbody> -->
                     @foreach ($matakuliah as $item)
                     <tr>
                         <td>{{ $item->kode_mk }}</td>
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->prodi->nama }}</td>
-                        <td>
+                        <td class="d-flex gap-2">
                             <a href="{{ route('matakuliah.show', $item->id) }}" class="btn btn-info">Show</a>
                             <a href="{{ route('matakuliah.edit', $item->id) }}" class="btn btn-warning">Edit</a>
                             <form method="POST" action="{{ route('matakuliah.destroy', $item->id) }}">

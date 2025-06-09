@@ -22,7 +22,7 @@ class ProdiController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
         $fakultas = Fakultas::all();
         return view('prodi.create', compact('fakultas'));
@@ -33,6 +33,11 @@ class ProdiController extends Controller
      */
     public function store(Request $request)
     {
+         //cek apakah user memiliki izin untuk membuat prodi
+        if ($request->user()->cannot('create', Prodi::class)) {
+            abort(403);
+        }
+
         // validasi input
         $input = $request->validate([
             'nama' => 'required|unique:prodi',
@@ -60,10 +65,14 @@ class ProdiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($prodi)
+    public function edit(Request $request, $prodi)
     {
         $prodi = Prodi::findOrFail($prodi);
-        // dd($prodi);
+
+        // cek apakah user memiliki izin untuk mengedit prodi
+        if ($request->user()->cannot('update', $prodi)) {
+            abort(403);
+        }
         $fakultas = Fakultas::all();
         return view('prodi.edit', compact('prodi', 'fakultas'));
     }
@@ -75,7 +84,12 @@ class ProdiController extends Controller
     {
         $prodi = Prodi::findOrFail($prodi);
 
-         // validasi input
+        // cek apakah user memiliki izin untuk mengupdate prodi
+        if ($request->user()->cannot('update', $prodi)) {
+            abort(403);
+        }
+
+        // validasi input
         $input = $request->validate([
             'nama' => 'required|unique:prodi',
             'singkatan' => 'required|max:5',
@@ -94,9 +108,12 @@ class ProdiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Prodi $prodi)
+    public function destroy(Request $request, Prodi $prodi)
     {
-        // dd($prodi);
+        // cek apakah user memiliki izin untuk menghapus prodi
+        if ($request->user()->cannot('delete', $prodi)) {
+            abort(403);
+        }
         $prodi->delete(); //menghapus data prodi
         return redirect()->route('prodi.index')->with('success', 'Prodi berhasil dihapus.');
     }

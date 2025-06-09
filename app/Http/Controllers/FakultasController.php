@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Fakultas;
 use Illuminate\Http\Request;
 
+
 class FakultasController extends Controller
 {
     /**
@@ -31,6 +32,11 @@ class FakultasController extends Controller
      */
     public function store(Request $request)
     {
+        //cek apakah user memiliki izin untuk membuat fakultas
+        if ($request->user()->cannot('create', Fakultas::class)) {
+            abort(403);
+        }
+
         // validasi input
         $input = $request->validate([
             'nama' => 'required|unique:fakultas',
@@ -73,7 +79,13 @@ class FakultasController extends Controller
     {
         $fakultas = Fakultas::findOrFail($fakultas);
 
-         // validasi input
+        //cek apakah user memiliki izin untuk mengupdate fakultas
+        if ($request->user()->cannot('update', $fakultas)) {
+            abort(403);
+        }
+
+
+        // validasi input
         $input = $request->validate([
             'nama' => 'required',
             'singkatan' => 'required|max:5',
@@ -91,9 +103,14 @@ class FakultasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($fakultas)
+    public function destroy(Request $request, $fakultas)
     {
         $fakultas = Fakultas::findOrFail($fakultas);
+
+        //cek apakah user memiliki izin untuk mengupdate fakultas
+        if ($request->user()->cannot('delete', $fakultas)) {
+            abort(403);
+        }
 
         // dd($fakultas);
         $fakultas->delete(); //menghapus data fakultas
